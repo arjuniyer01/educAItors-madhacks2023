@@ -1,4 +1,4 @@
 streamlit
 streamlit_webrtc
 pycountry
-langcodes
+streamlit_echarts
