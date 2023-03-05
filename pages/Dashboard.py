@@ -40,7 +40,7 @@ if role == 'student':
     st.markdown('## Progress')
     for key, value in content.items():
         with st.expander(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(key)))}: {value[0:10]}..."):
-            print(value)
+            st.write(value)
             for image in value["images"]:
                 st.image(Image.open(io.BytesIO(image)))
             st.write(value["summary"])
