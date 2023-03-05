@@ -5,8 +5,8 @@ import auth
 import webbrowser
 import db
 import ui
-import ocr
-import object
+# import ocr
+# import object
 
 if 'user_email' not in st.session_state:
     st.session_state.user_email = None
@@ -51,21 +51,21 @@ elif uploaded_file:
     if selected == "Object detection":
         with st.spinner("Summarizing using object detection..."):
             st.session_state.result_mode = True
-            img = Image.open(uploaded_file)
-            labels, img = object.detect_objects(img.copy())
-            st.image(img)
-            st.write(labels)
+            # img = Image.open(uploaded_file)
+            # labels, img = object.detect_objects(img.copy())
+            # st.image(img)
+            # st.write(labels)
             # ui.process_result(" ".join(labels), settings)
             # ui.display_result()
             # ui.save_result()
     elif selected == "OCR":
         with st.spinner("Summarizing using OCR..."):
             st.session_state.result_mode = True
-            img = Image.open(uploaded_file)
-            ocr_text = ocr.run_ocr(img.copy())
-            st.write(ocr_text)
-            ui.process_result(ocr_text, settings)
-            ui.display_result()
-            ui.save_result()
+            # img = Image.open(uploaded_file)
+            # ocr_text = ocr.run_ocr(img.copy())
+            # st.write(ocr_text)
+            # ui.process_result(ocr_text, settings)
+            # ui.display_result()
+            # ui.save_result()
     
 ui.about()
