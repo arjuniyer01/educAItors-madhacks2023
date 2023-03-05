@@ -61,6 +61,7 @@ uploaded_file = st.file_uploader("File Upload", label_visibility='hidden', type=
 
 if user_input:
     with st_lottie_spinner(lottie_object, key="download", width=250):
+        st.write(f"{st.session_state.settings['language']}")
         ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {user_input}")
         ui.display_result()
         ui.save_result()

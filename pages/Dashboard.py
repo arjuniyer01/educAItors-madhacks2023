@@ -40,11 +40,9 @@ if role == 'student':
     st.markdown('## Progress')
     for key, value in content.items():
         # {value[0:10]}
-        with st.expander(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(key)))}: {value['summary'][0:10]}..."):
-            st.image(Image.open(io.BytesIO(value["images"][0])))
-            st.image(Image.open(io.BytesIO(value["images"][1])))
-            st.write(value["summary"])
-            st.button('Email to me', on_click=comms.send_email, args=[st.session_state.user_email, value["summary"], key], key=key)
+        with st.expander(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(key)))}: {value[0:10]}..."):
+            st.write(value)
+            st.button('Email to me', on_click=comms.send_email, args=[st.session_state.user_email, value, key], key=key)
 
 
 

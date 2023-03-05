@@ -3,8 +3,6 @@ import ai
 import db
 import time
 import avatar
-import requests
-from io import BytesIO
 
 result_text = ""
 result_images = []
@@ -34,11 +32,7 @@ def save_result():
     global result_images
     save_time = int(time.time())
     progress = db.get_progress(st.session_state.user_id)
-    progress[f"{save_time}"] = {}
-    progress[f"{save_time}"]["images"] = []
-    progress[f"{save_time}"]["summary"] = result_text
-    for image_link in result_images:
-        progress[f"{save_time}"]["images"].append(BytesIO(requests.get(image_link).content).getvalue())
+    progress[f"{save_time}"] = result_text
     db.update_progress(st.session_state.user_id, progress)
 
 def about():
