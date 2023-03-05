@@ -46,7 +46,7 @@ with col2:
     st.title(":book: educAIte")
 
 user_input = st.text_input("User Input", label_visibility='hidden', placeholder="Paste text here to summarize")
-uploaded_file = st.file_uploader("File Upload", label_visibility='hidden', type=["png", "jpeg", "jpg", "mp3"])
+uploaded_file = st.file_uploader("File Upload", label_visibility='hidden', type=["png", "jpeg", "jpg", "mp3", "pdf", "docx"])
 
 if user_input:
     with st.spinner("Summarizing input text..."):
