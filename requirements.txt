@@ -22,3 +22,4 @@ pdfminer.six
 docx
 python-docx
 google-cloud-speech
+google-cloud-texttospeech
