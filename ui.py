@@ -38,10 +38,18 @@ def save_result():
 def about(expanded: bool = False):
     with st.expander("About", expanded=expanded):
         st.markdown("## :wave: Welcome to educAIte!")
-        st.markdown("educAIte is a platform for teachers and students to learn and teach using AI.")
-        st.markdown("## :question: How does it work?")
-        st.markdown("educAIte uses AI to summarize text and images, while translating text to your preferred language.")
-        st.markdown("## :question: How can I use it?")
-        st.markdown("<Add text here>")
-        st.markdown("## :question: How can I contribute?")
-        st.markdown("educAIte is open source, and you can contribute to the project on [GitHub](https://github.com/arjuniyer01/educAItors-madhacks2023)")
+        st.markdown("A powerful language agnostic education tool leveraging AI and computer vision.")
+        st.markdown("## How does it work?")
+        st.markdown("""
+                    Provide skim and detailed summaries of text, pdfs, docx, images, and voice in any language to aid students with their quest to learn
+Provide AI generated visual learning tools to help children learn languages or topics.
+Provide a mini-podcast where you can listen to what you are learning.
+Provide object detection computer vision tools for younger children to help them learn about the world around them
+Completely language and age customizable.
+""")
+        st.markdown("## How can I use it?")
+        st.markdown("""
+        Upload textbook/notes/book in any format and get a skim or detailed summary with images and voice to aid learning.
+Upload recording of lecture to get a skim or detailed summary with images and voice to aid learning.
+Learn a new language visually by getting labeled images
+        """)

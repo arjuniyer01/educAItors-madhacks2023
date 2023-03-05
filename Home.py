@@ -84,7 +84,7 @@ try:
                     audio = pydub.AudioSegment.from_mp3(uploaded_file)
                     audio.export("audio.mp3", format='mp3')
                     audio_bytes = open("audio.mp3", 'rb').read()
-                    st.audio(audio_bytes, format=f'audio/.mp3', start_time=0)
+                    # st.audio(audio_bytes, format=f'audio/.mp3', start_time=0)
                     whisper_text = ai.get_text_from_whisper()["text"]
                     ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in {detail_dict[detail]}. {whisper_text}")
                     ui.display_result()
