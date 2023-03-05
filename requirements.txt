@@ -18,4 +18,5 @@ opencv-python
 ffmpeg-python
 pydub
 pdfminer
+pdfminer.six
 docx
