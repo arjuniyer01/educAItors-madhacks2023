@@ -1,6 +1,7 @@
 import streamlit as st
 import time
 from streamlit_echarts import st_echarts
+import db
 import auth
 import webbrowser
 
@@ -22,18 +23,16 @@ except Exception as e:
 st.markdown('# :house: Dashboard')
 
 # TODO: Get array from DB
-content = {1677964891: 'kefgvwksjdfbwlvrsihfahemfbsldfh', 
-           1677964892: 'aekugfoquelgafvbcqoukeafgaejf,ghwkegfj', 
-           1677964893: 'keyajfgbquakefhakefavciqykjeafgqkeagf'}
+content = db.get_progress(st.session_state.user_id)
 
 # TODO: Get user's role from DB
-role = st.selectbox('Role', ['student', 'teacher'])
+role = db.get_role(st.session_state.user_id)
 
 if role == 'student':
     # TODO: Get progress from DB
     st.markdown('## Progress')
     for key, value in content.items():
-        with st.expander(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(key))}: {value[0:10]}..."):
+        with st.expander(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(key)))}: {value[0:10]}..."):
             st.write(value)
 elif role == 'teacher':
     # TODO: Get teacher's dashboarding info from DB

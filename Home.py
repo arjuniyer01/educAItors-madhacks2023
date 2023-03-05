@@ -2,9 +2,13 @@ import streamlit as st
 from streamlit_webrtc import webrtc_streamer
 import auth
 import webbrowser
+import db
 
 if 'user_email' not in st.session_state:
     st.session_state.user_email = None
+
+if 'user_id' not in st.session_state:
+    st.session_state.user_id = None
 
 if not st.session_state.user_email:
     if st.button("Login"):
@@ -12,9 +16,11 @@ if not st.session_state.user_email:
 elif st.session_state.user_email:
     # st.balloons()
     st.markdown(f"`{st.session_state.user_email}`")
+    db.set_user(st.session_state.user_email)
+    st.session_state.user_id = db.get_user_id(st.session_state.user_email)
 
 try:
-    st.session_state.user_email = auth.display_user()
+    st.session_state.user_email = auth.get_user()
 except Exception as e:
     pass
 
