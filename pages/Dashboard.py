@@ -35,12 +35,10 @@ content = db.get_progress(st.session_state.user_id)
 # TODO: Get user's role from DB
 role = db.get_role(st.session_state.user_id)
 
-st.write(f"{len(content.items())}")
-
 if role == 'student':
     # TODO: Get progress from DB
     st.markdown('## Progress')
-    if len(content.items() == 0):
+    if len(content.items()) == 0:
         st.warning('No progress yet')
         st.stop()
     for key, value in content.items():
