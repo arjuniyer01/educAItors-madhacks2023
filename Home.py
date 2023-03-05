@@ -18,7 +18,7 @@ def load_lottieurl(url: str):
         return None
     return r.json()
 
-lottie_object = load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_v7nRH3.json")
+lottie_object = load_lottieurl("https://lottiefiles.com/138450-color-loader")
 
 # # Instantiation
 # settings = None
