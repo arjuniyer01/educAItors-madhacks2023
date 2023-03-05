@@ -4,6 +4,7 @@ from streamlit_echarts import st_echarts
 import db
 import auth
 import webbrowser
+import comms
 
 if 'user_email' not in st.session_state:
     st.session_state.user_email = None
@@ -34,6 +35,7 @@ if role == 'student':
     for key, value in content.items():
         with st.expander(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(key)))}: {value[0:10]}..."):
             st.write(value)
+            st.button('Email to me', onclick=comms.send_email, args=[st.session_state.user_email, value])
 elif role == 'teacher':
     # TODO: Get teacher's dashboarding info from DB
     option1 = {
