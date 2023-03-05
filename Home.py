@@ -8,6 +8,7 @@ import db
 import ui
 import ocr
 import object
+import file_reader
 
 # # Instantiation
 # settings = None
@@ -17,9 +18,6 @@ if 'user_email' not in st.session_state:
 
 if 'user_id' not in st.session_state:
     st.session_state.user_id = None
-
-if 'result_mode' not in st.session_state:
-    st.session_state.result_mode = False
 
 if 'settings' not in st.session_state:
     st.session_state.settings = None
@@ -40,9 +38,6 @@ if not st.session_state.user_email:
 elif st.session_state.user_email:
     # st.balloons()
     st.markdown(f"`{st.session_state.user_email}`")
-    # db.set_user(st.session_state.user_email)
-    # st.session_state.user_id = db.get_user_id(st.session_state.user_email)
-    # settings = db.get_settings(st.session_state.user_id)
 
 
 # UI Begins
@@ -55,14 +50,12 @@ uploaded_file = st.file_uploader("File Upload", label_visibility='hidden', type=
 
 if user_input:
     with st.spinner("Summarizing input text..."):
-        st.session_state.result_mode = True
         ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {user_input}")
         ui.display_result()
         ui.save_result()
 elif uploaded_file:
     if uploaded_file.name.endswith(".mp3"):
         with st.spinner("Summarizing audio input..."):
-            st.session_state.result_mode = True
             audio = pydub.AudioSegment.from_mp3(uploaded_file)
             audio.export("audio.mp3", format='mp3')
             audio_bytes = open("audio.mp3", 'rb').read()
@@ -72,9 +65,22 @@ elif uploaded_file:
             ui.display_result()
             ui.save_result()
 
+    if uploaded_file.name.endswith(".pdf"):
+        with st.spinner("Summarizing PDF input..."):
+            pdf_text = file_reader.read_pdf(uploaded_file)
+            ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {pdf_text}")
+            ui.display_result()
+            ui.save_result()
+
+    if uploaded_file.name.endswith(".docx"):
+        with st.spinner("Summarizing DOCX input..."):
+            docx_text = file_reader.convert_docx_to_text(uploaded_file)
+            ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {docx_text}")
+            ui.display_result()
+            ui.save_result()
+
     if st.button("Object detection"):
         with st.spinner("Summarizing using object detection..."):
-            st.session_state.result_mode = True
             img = Image.open(uploaded_file)
             labels, img = object.detect_objects(img.copy())
             st.image(img)
@@ -83,7 +89,6 @@ elif uploaded_file:
             ui.save_result()
     if st.button("OCR"):
         with st.spinner("Summarizing using OCR..."):
-            st.session_state.result_mode = True
             img = Image.open(uploaded_file)
             ocr_text = ocr.run_ocr(img.copy())
             st.write(ocr_text)

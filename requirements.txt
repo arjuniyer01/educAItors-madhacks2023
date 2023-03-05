@@ -17,3 +17,5 @@ openai
 opencv-python
 ffmpeg-python
 pydub
+pdfminer
+docx
