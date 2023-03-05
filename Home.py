@@ -9,8 +9,8 @@ import ui
 import ocr
 import object
 
-# Instantiation
-settings = None
+# # Instantiation
+# settings = None
 
 if 'user_email' not in st.session_state:
     st.session_state.user_email = None
@@ -24,6 +24,9 @@ if 'result_mode' not in st.session_state:
 # Login
 try:
     st.session_state.user_email = auth.get_user()
+    db.set_user(st.session_state.user_email)
+    st.session_state.user_id = db.get_user_id(st.session_state.user_email)
+    settings = db.get_settings(st.session_state.user_id)
 except Exception as e:
     pass
 
@@ -34,9 +37,9 @@ if not st.session_state.user_email:
 elif st.session_state.user_email:
     # st.balloons()
     st.markdown(f"`{st.session_state.user_email}`")
-    db.set_user(st.session_state.user_email)
-    st.session_state.user_id = db.get_user_id(st.session_state.user_email)
-    settings = db.get_settings(st.session_state.user_id)
+    # db.set_user(st.session_state.user_email)
+    # st.session_state.user_id = db.get_user_id(st.session_state.user_email)
+    # settings = db.get_settings(st.session_state.user_id)
 
 
 # UI Begins
