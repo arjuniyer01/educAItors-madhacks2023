@@ -39,7 +39,8 @@ if role == 'student':
     # TODO: Get progress from DB
     st.markdown('## Progress')
     for key, value in content.items():
-        with st.expander(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(key)))}: {value[0:10]}..."):
+        # {value[0:10]}
+        with st.expander(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(key)))}: ##..."):
             st.write(value)
             # for image in value["images"]:
             #     st.image(Image.open(io.BytesIO(image)))

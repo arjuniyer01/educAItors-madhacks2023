@@ -25,7 +25,7 @@ elif st.session_state.user_email:
 
 # TODO: get user's existing settings from DB
 
-languages = ['English']
+languages = ["English", "Spanish", "French", "Mandarin", "Hindi"]
 countries = [country.name for country in pycountry.countries]
 
 # create a dictionary to store language names and countries where they are spoken
