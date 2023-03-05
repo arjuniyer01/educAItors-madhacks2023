@@ -1,13 +1,6 @@
 import os
 from google.cloud import texttospeech
 import streamlit as st
-import json
-from dotenv import load_dotenv
-
-load_dotenv('.env')
-
-with open('imposing-elixir-379617-9f22e9edde76.json', 'w') as f:
-    json.dump(st.secrets["GOOGLE_APPLICATION_CREDENTIALS"], f)
 
 # set up credentials for Google Cloud TTS
 # os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = json(os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
