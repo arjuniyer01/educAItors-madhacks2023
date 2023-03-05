@@ -12,7 +12,7 @@ try:
     st.session_state.user_email = auth.get_user()
     db.set_user(st.session_state.user_email)
     st.session_state.user_id = db.get_user_id(st.session_state.user_email)
-    st.session_state.settings = db.get_settings(st.session_state.user_id)
+    settings = db.get_settings(st.session_state.user_id)
 except Exception as e:
     pass
 

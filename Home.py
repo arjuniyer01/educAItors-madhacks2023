@@ -39,7 +39,7 @@ try:
     st.session_state.user_email = auth.get_user()
     db.set_user(st.session_state.user_email)
     st.session_state.user_id = db.get_user_id(st.session_state.user_email)
-    st.session_state.settings = db.get_settings(st.session_state.user_id)
+    settings = db.get_settings(st.session_state.user_id)
 except Exception as e:
     pass
 
@@ -61,8 +61,8 @@ uploaded_file = st.file_uploader("File Upload", label_visibility='hidden', type=
 
 if user_input:
     with st_lottie_spinner(lottie_object, key="download", width=250):
-        st.write(f"{st.session_state.settings['language']}")
-        ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {user_input}")
+        st.write(f"{settings['language']}")
+        ui.process_result(f"Summarize the below text in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {user_input}")
         ui.display_result()
         ui.save_result()
 elif uploaded_file:
@@ -73,21 +73,21 @@ elif uploaded_file:
             audio_bytes = open("audio.mp3", 'rb').read()
             st.audio(audio_bytes, format=f'audio/.mp3', start_time=0)
             whisper_text = ai.get_text_from_whisper()["text"]
-            ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {whisper_text}")
+            ui.process_result(f"Summarize the below text in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {whisper_text}")
             ui.display_result()
             ui.save_result()
 
     if uploaded_file.name.endswith(".pdf"):
         with st.spinner("Summarizing PDF input..."):
             pdf_text = file_reader.read_pdf(uploaded_file)
-            ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {pdf_text}")
+            ui.process_result(f"Summarize the below text in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {pdf_text}")
             ui.display_result()
             ui.save_result()
 
     if uploaded_file.name.endswith(".docx"):
         with st.spinner("Summarizing DOCX input..."):
             docx_text = file_reader.convert_docx_to_text(uploaded_file)
-            ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {docx_text}")
+            ui.process_result(f"Summarize the below text in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {docx_text}")
             ui.display_result()
             ui.save_result()
 
@@ -99,7 +99,7 @@ elif uploaded_file:
                     img = Image.open(uploaded_file)
                     labels, img = image_processing.detect_objects(img.copy())
                     st.image(img)
-                    ui.process_result(f"Define the objects mentioned below in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {' '.join(labels)}")
+                    ui.process_result(f"Define the objects mentioned below in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {' '.join(labels)}")
                     ui.display_result()
                     ui.save_result()
             if selected == "OCR":
@@ -107,7 +107,7 @@ elif uploaded_file:
                     img = Image.open(uploaded_file)
                     ocr_text = image_processing.run_ocr(img.copy())
                     st.write(ocr_text)
-                    ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {ocr_text}")
+                    ui.process_result(f"Summarize the below text in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {ocr_text}")
                     ui.display_result()
                     ui.save_result()
 
