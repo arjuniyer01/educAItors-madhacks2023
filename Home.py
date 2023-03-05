@@ -5,7 +5,7 @@ import auth
 import webbrowser
 import db
 import ui
-# import ocr
+import ocr
 # import object
 
 if 'user_email' not in st.session_state:
