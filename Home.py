@@ -24,6 +24,7 @@ lottie_object = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_Q
 
 # # Instantiation
 # settings = None
+detail_dict = {"Skim": "one paragraph", "Detailed": "detail"}
 
 if 'user_email' not in st.session_state:
     st.session_state.user_email = None
@@ -70,11 +71,11 @@ uploaded_file = st.file_uploader("File Upload", label_visibility='hidden', type=
 try:
     if user_input:
         detail = st.selectbox("Select detail level", ["Skim", "Detailed"])
-        detail_dict = {"Skim": "one paragraph", "Detailed": "detail"}
-        with st_lottie_spinner(lottie_object, key="download", width=150):
-            ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in {detail_dict[detail]}. {user_input}")
-            ui.display_result()
-            ui.save_result()
+        if st.button("Process"):
+            with st_lottie_spinner(lottie_object, key="download", width=150):
+                ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in {detail_dict[detail]}. {user_input}")
+                ui.display_result()
+                ui.save_result()
     elif uploaded_file:
         if uploaded_file.name.endswith(".mp3"):
             with st_lottie_spinner(lottie_object, key="download", width=150):
