@@ -5,6 +5,8 @@ import db
 import auth
 import webbrowser
 import comms
+from PIL import Image
+import io
 
 if 'user_email' not in st.session_state:
     st.session_state.user_email = None
@@ -38,8 +40,15 @@ if role == 'student':
     st.markdown('## Progress')
     for key, value in content.items():
         with st.expander(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(key)))}: {value[0:10]}..."):
-            st.write(value)
-            st.button('Email to me', on_click=comms.send_email, args=[st.session_state.user_email, value, key], key=key)
+            for image in value["images"]:
+                st.image(Image.open(io.BytesIO(image)))
+            st.write(value["summary"])
+            st.button('Email to me', on_click=comms.send_email, args=[st.session_state.user_email, value["summary"], key], key=key)
+
+
+
+
+
 elif role == 'teacher':
     # TODO: Get teacher's dashboarding info from DB
     option1 = {
