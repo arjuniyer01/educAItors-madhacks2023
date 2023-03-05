@@ -25,7 +25,7 @@ elif st.session_state.user_email:
 
 # TODO: get user's existing settings from DB
 
-languages = ["English", "Spanish", "French", "Mandarin", "Hindi"]
+languages = ["English", "Spanish", "French", "Chinese", "Hindi"]
 countries = [country.name for country in pycountry.countries]
 
 # create a dictionary to store language names and countries where they are spoken
@@ -45,4 +45,5 @@ with st.form("my_form"):
    submitted = st.form_submit_button("Submit")
    if submitted:
       db.update_settings(st.session_state.user_id, {"name": name, "phone": phone, "age": age, "location": location, "language": language})
+      st.session_state.settings = db.get_settings(st.session_state.user_id)
       st.success("Submitted!")

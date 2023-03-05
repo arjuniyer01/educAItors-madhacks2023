@@ -6,13 +6,14 @@ import streamlit as st
 # os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = json(os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'imposing-elixir-379617-9f22e9edde76.json'
 
+lang_dict = {"English": "en-GB", "French": "fr-FR", "Spanish": "es-ES", "Chinese": "zh-CN", "Hindi": "hi-IN"}
 
 def generate_voice(text: str):
     # create a client object for Google Cloud TTS
     client = texttospeech.TextToSpeechClient()
     # set up default voice configuration
     voice = texttospeech.VoiceSelectionParams(
-        language_code='en-GB', ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
+        language_code=lang_dict[st.session_state.settings['language']], ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
     )
     # set up default audio configuration
     audio_config = texttospeech.AudioConfig(
