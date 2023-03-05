@@ -7,7 +7,9 @@ from dotenv import load_dotenv
 load_dotenv('.env')
 
 # set up credentials for Google Cloud TTS
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = json(os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
+# os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = json(os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = json(st.secrets["GOOGLE_APPLICATION_CREDENTIALS"])
+
 
 def generate_voice(text: str):
     # create a client object for Google Cloud TTS
