@@ -2,3 +2,13 @@ streamlit
 streamlit_webrtc
 pycountry
 streamlit_echarts
+pillow
+pytesseract
+tesseract
+tesseract-ocr
+torch
+torchvision
+opencv-python
+psutil
+PyYAML
+seaborn
