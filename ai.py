@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 import streamlit as st
 
-load_dotenv(".env")
+# load_dotenv(".env")
 
 # openai.api_key = os.environ['OPENAI_API_KEY']
 openai.api_key = st.secrets["OPENAI_API_KEY"]
