@@ -21,12 +21,15 @@ if 'user_id' not in st.session_state:
 if 'result_mode' not in st.session_state:
     st.session_state.result_mode = False
 
+if 'settings' not in st.session_state:
+    st.session_state.settings = None
+
 # Login
 try:
     st.session_state.user_email = auth.get_user()
     db.set_user(st.session_state.user_email)
     st.session_state.user_id = db.get_user_id(st.session_state.user_email)
-    settings = db.get_settings(st.session_state.user_id)
+    st.session_state.settings = db.get_settings(st.session_state.user_id)
 except Exception as e:
     pass
 
@@ -53,7 +56,7 @@ uploaded_file = st.file_uploader("File Upload", label_visibility='hidden', type=
 if user_input:
     with st.spinner("Summarizing input text..."):
         st.session_state.result_mode = True
-        ui.process_result(f"Summarize the below text in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {user_input}")
+        ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {user_input}")
         ui.display_result()
         ui.save_result()
 elif uploaded_file:
@@ -65,7 +68,7 @@ elif uploaded_file:
             audio_bytes = open("audio.mp3", 'rb').read()
             st.audio(audio_bytes, format=f'audio/.mp3', start_time=0)
             whisper_text = ai.get_text_from_whisper()["text"]
-            ui.process_result(f"Summarize the below text in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {whisper_text}")
+            ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {whisper_text}")
             ui.display_result()
             ui.save_result()
 
@@ -75,7 +78,7 @@ elif uploaded_file:
             img = Image.open(uploaded_file)
             labels, img = object.detect_objects(img.copy())
             st.image(img)
-            ui.process_result(f"Define the objects mentioned below in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {' '.join(labels)}")
+            ui.process_result(f"Define the objects mentioned below in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {' '.join(labels)}")
             ui.display_result()
             ui.save_result()
     if st.button("OCR"):
@@ -84,7 +87,7 @@ elif uploaded_file:
             img = Image.open(uploaded_file)
             ocr_text = ocr.run_ocr(img.copy())
             st.write(ocr_text)
-            ui.process_result(f"Summarize the below text in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {ocr_text}")
+            ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {ocr_text}")
             ui.display_result()
             ui.save_result()
 
