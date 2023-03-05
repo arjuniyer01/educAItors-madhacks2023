@@ -6,8 +6,7 @@ import auth
 import webbrowser
 import db
 import ui
-import ocr
-import object
+import image_processing
 import file_reader
 
 # # Instantiation
@@ -62,38 +61,43 @@ elif uploaded_file:
             st.audio(audio_bytes, format=f'audio/.mp3', start_time=0)
             whisper_text = ai.get_text_from_whisper()["text"]
             ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {whisper_text}")
-            ui.display_result()
-            ui.save_result()
+            # ui.display_result()
+            # ui.save_result()
 
     if uploaded_file.name.endswith(".pdf"):
         with st.spinner("Summarizing PDF input..."):
             pdf_text = file_reader.read_pdf(uploaded_file)
             ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {pdf_text}")
-            ui.display_result()
-            ui.save_result()
+            # ui.display_result()
+            # ui.save_result()
 
     if uploaded_file.name.endswith(".docx"):
         with st.spinner("Summarizing DOCX input..."):
             docx_text = file_reader.convert_docx_to_text(uploaded_file)
             ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {docx_text}")
-            ui.display_result()
-            ui.save_result()
+            # ui.display_result()
+            # ui.save_result()
 
-    if st.button("Object detection"):
-        with st.spinner("Summarizing using object detection..."):
-            img = Image.open(uploaded_file)
-            labels, img = object.detect_objects(img.copy())
-            st.image(img)
-            ui.process_result(f"Define the objects mentioned below in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {' '.join(labels)}")
-            ui.display_result()
-            ui.save_result()
-    if st.button("OCR"):
-        with st.spinner("Summarizing using OCR..."):
-            img = Image.open(uploaded_file)
-            ocr_text = ocr.run_ocr(img.copy())
-            st.write(ocr_text)
-            ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {ocr_text}")
-            ui.display_result()
-            ui.save_result()
+    if uploaded_file.name.endswith(".png") or uploaded_file.name.endswith(".jpeg") or uploaded_file.name.endswith(".jpg"):
+        selected = st.selectbox("Select image processing method", ["Object detection", "OCR"])
+        if st.button("Process"):
+            if selected == "Object detection":
+                with st.spinner("Summarizing using object detection..."):
+                    img = Image.open(uploaded_file)
+                    labels, img = image_processing.detect_objects(img.copy())
+                    st.image(img)
+                    ui.process_result(f"Define the objects mentioned below in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {' '.join(labels)}")
+                    # ui.display_result()
+                    # ui.save_result()
+            if selected == "OCR":
+                with st.spinner("Summarizing using OCR..."):
+                    img = Image.open(uploaded_file)
+                    ocr_text = image_processing.run_ocr(img.copy())
+                    st.write(ocr_text)
+                    ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {ocr_text}")
+                    # ui.display_result()
+                    # ui.save_result()
 
+ui.display_result()
+ui.save_result()
 ui.about()
