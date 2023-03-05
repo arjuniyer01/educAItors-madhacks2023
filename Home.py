@@ -20,6 +20,7 @@ if 'result_mode' not in st.session_state:
 if not st.session_state.user_email:
     if st.button("Login"):
         webbrowser.open_new_tab(auth.get_login_str())
+    st.write(f"{auth.get_login_str()}")
 elif st.session_state.user_email:
     # st.balloons()
     st.markdown(f"`{st.session_state.user_email}`")
