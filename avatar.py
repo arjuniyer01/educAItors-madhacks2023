@@ -2,6 +2,7 @@ import os
 from google.cloud import texttospeech
 import streamlit as st
 import json
+from dotenv import load_dotenv
 
 load_dotenv('.env')
 
