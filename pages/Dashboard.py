@@ -35,7 +35,7 @@ content = db.get_progress(st.session_state.user_id)
 # TODO: Get user's role from DB
 role = db.get_role(st.session_state.user_id)
 
-st.write(f"{content}")
+st.write(f"{len(content.items())}")
 
 if role == 'student':
     # TODO: Get progress from DB
