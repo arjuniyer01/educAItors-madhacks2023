@@ -39,7 +39,7 @@ def get_login_str():
     return f'{authorization_url}'
 
 
-def get_user() -> tuple[str, str]:
+def get_user():
     client: GoogleOAuth2 = GoogleOAuth2(CLIENT_ID, CLIENT_SECRET)
     # get the code from the url
     code = st.experimental_get_query_params()['code']

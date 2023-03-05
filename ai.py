@@ -27,6 +27,8 @@ def generate_image(image_prompt):
     image_url = openai.Image.create(prompt=f"{image_prompt}, hd, oil painting", n=1, size="1024x1024")['data'][0]['url']
     return image_url
 
+def get_text_from_whisper():
+    return openai.Audio.transcribe("whisper-1", open("audio.mp3", "rb"))
 
 
 
