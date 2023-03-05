@@ -21,3 +21,4 @@ pdfminer
 pdfminer.six
 docx
 python-docx
+google-cloud

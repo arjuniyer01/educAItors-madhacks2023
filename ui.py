@@ -2,6 +2,7 @@ import streamlit as st
 import ai
 import db
 import time
+import avatar
 
 result_text = ""
 result_images = []
@@ -24,6 +25,7 @@ def display_result():
             st.image(i)
     with col2:
         st.markdown(f"#### {result_text}")
+    avatar.generate_voice(result_text)
 
 def save_result():
     global result_text
