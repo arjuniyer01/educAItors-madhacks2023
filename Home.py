@@ -62,6 +62,7 @@ elif uploaded_file:
             audio_bytes = open("audio.mp3", 'rb').read()
             st.audio(audio_bytes, format=f'audio/.mp3', start_time=0)
             whisper_text = ai.get_text_from_whisper()
+            st.write(whisper_text)
             # ui.process_result(f"Summarize the below text in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {whisper_text}")
             # ui.display_result()
             # ui.save_result()
