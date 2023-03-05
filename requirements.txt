@@ -14,5 +14,4 @@ httpx_oauth
 python-dotenv
 pymongo
 openai
-ssl
 opencv-python
