@@ -55,7 +55,7 @@ elif uploaded_file:
             labels, img = object.detect_objects(img.copy())
             st.image(img)
             st.write(labels)
-            ui.process_result(f"The below text describes objects in an image. Summarize the below text in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {' '.join(labels)}")
+            ui.process_result(f"Define the objects mentioned below in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {' '.join(labels)}")
             ui.display_result()
             ui.save_result()
     if st.button("OCR"):
