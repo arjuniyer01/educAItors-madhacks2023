@@ -38,7 +38,7 @@ def save_result():
     progress[f"{save_time}"]["images"] = []
     progress[f"{save_time}"]["summary"] = result_text
     for image_link in result_images:
-        progress[f"{save_time}"]["images"].append(BytesIO(requests.get(image_link).content))
+        progress[f"{save_time}"]["images"].append(BytesIO(requests.get(image_link).content).getvalue())
     db.update_progress(st.session_state.user_id, progress)
 
 def about():
