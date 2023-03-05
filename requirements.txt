@@ -3,9 +3,7 @@ streamlit_webrtc
 pycountry
 streamlit_echarts
 pillow
-pytesseract
-tesseract
-tesseract-ocr
+pytesseract==0.3.8
 torch
 torchvision
 opencv-python
