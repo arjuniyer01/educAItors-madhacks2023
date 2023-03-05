@@ -53,7 +53,7 @@ if not st.session_state.user_email:
     <br>
     ''', unsafe_allow_html=True)
     st.write("")
-    ui.about()
+    ui.about(True)
     st.stop()
 elif st.session_state.user_email:
     st.markdown(f"`{st.session_state.user_email}`")

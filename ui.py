@@ -35,8 +35,8 @@ def save_result():
     progress[f"{save_time}"] = result_text
     db.update_progress(st.session_state.user_id, progress)
 
-def about():
-    with st.expander("About"):
+def about(expanded: bool = False):
+    with st.expander("About", expanded=expanded):
         st.markdown("## :wave: Welcome to educAIte!")
         st.markdown("educAIte is a platform for teachers and students to learn and teach using AI.")
         st.markdown("## :question: How does it work?")
