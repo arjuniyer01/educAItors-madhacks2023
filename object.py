@@ -1,8 +1,4 @@
-import streamlit as st
 import torch
-# import torchvision
-import numpy as np
-from PIL import Image, ImageDraw
 import ssl
 
 ssl._create_default_https_context = ssl._create_unverified_context

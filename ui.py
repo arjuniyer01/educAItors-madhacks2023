@@ -6,11 +6,11 @@ import time
 result_text = ""
 result_images = []
 
-def process_result(prompt: str, settings: dict):
+def process_result(prompt: str):
     global result_text
     global result_images
     result_images.clear()
-    result_text = ai.generate_response(f"Summarize the below text in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {prompt}")
+    result_text = ai.generate_response(prompt)
     for i in range(2):
         result_images.append(ai.generate_image(ai.generate_image_prompt(prompt)))
 

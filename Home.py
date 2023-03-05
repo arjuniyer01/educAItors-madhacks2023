@@ -44,7 +44,7 @@ webrtc_streamer(key="sample")
 if user_input:
     with st.spinner("Summarizing input text..."):
         st.session_state.result_mode = True
-        ui.process_result(user_input, settings)
+        ui.process_result(f"Summarize the below text in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {user_input}")
         ui.display_result()
         ui.save_result()
 elif uploaded_file:
@@ -55,7 +55,7 @@ elif uploaded_file:
             labels, img = object.detect_objects(img.copy())
             st.image(img)
             st.write(labels)
-            ui.process_result(" ".join(labels), settings)
+            ui.process_result(f"The below text describes objects in an image. Summarize the below text in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {' '.join(labels)}")
             ui.display_result()
             ui.save_result()
     if st.button("OCR"):
@@ -64,7 +64,7 @@ elif uploaded_file:
             img = Image.open(uploaded_file)
             ocr_text = ocr.run_ocr(img.copy())
             st.write(ocr_text)
-            ui.process_result(ocr_text, settings)
+            ui.process_result(f"Summarize the below text in {settings['language']}, explain like I am {settings['age']} years old in one paragraph. {ocr_text}")
             ui.display_result()
             ui.save_result()
     
