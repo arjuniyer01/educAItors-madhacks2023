@@ -44,6 +44,11 @@ except Exception as e:
     pass
 
 if not st.session_state.user_email:
+    st.markdown(f'''
+    <a href={auth.get_login_str()}>
+    <img src="google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" width="50" height="50">
+    </a>
+    ''', unsafe_allow_html=True)
     st.markdown(f"[Google Login]({auth.get_login_str()})")
     st.warning("Please login to access this page")
     st.stop()
