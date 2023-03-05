@@ -21,7 +21,7 @@ def generate_response(prompt):
 
 #Generate prompt for image:
 def generate_image_prompt(response):
-    image_prompt = generate_response("Generate a short description for a non-violent image that aligns with the time period and the following text: " + response)
+    image_prompt = generate_response("Generate a 50 word description for a non-violent image that aligns with the time period and the following text: " + response)
     return image_prompt
 
 #Generate dall-e image:
