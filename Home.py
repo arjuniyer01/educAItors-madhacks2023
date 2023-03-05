@@ -6,7 +6,7 @@ import webbrowser
 import db
 import ui
 import ocr
-# import object
+import object
 
 if 'user_email' not in st.session_state:
     st.session_state.user_email = None
@@ -20,7 +20,7 @@ if 'result_mode' not in st.session_state:
 if not st.session_state.user_email:
     if st.button("Login"):
         webbrowser.open_new_tab(auth.get_login_str())
-    st.write(f"{auth.get_login_str()}")
+    st.markdown(f"[Google Login]({auth.get_login_str()})")
 elif st.session_state.user_email:
     # st.balloons()
     st.markdown(f"`{st.session_state.user_email}`")
@@ -48,18 +48,17 @@ if user_input:
         ui.display_result()
         ui.save_result()
 elif uploaded_file:
-    selected = st.selectbox("Select an option", ["OCR", "Object detection"])
-    if selected == "Object detection":
+    if st.button("Object detection"):
         with st.spinner("Summarizing using object detection..."):
             st.session_state.result_mode = True
-            # img = Image.open(uploaded_file)
-            # labels, img = object.detect_objects(img.copy())
-            # st.image(img)
-            # st.write(labels)
-            # ui.process_result(" ".join(labels), settings)
-            # ui.display_result()
-            # ui.save_result()
-    elif selected == "OCR":
+            img = Image.open(uploaded_file)
+            labels, img = object.detect_objects(img.copy())
+            st.image(img)
+            st.write(labels)
+            ui.process_result(" ".join(labels), settings)
+            ui.display_result()
+            ui.save_result()
+    if st.button("OCR"):
         with st.spinner("Summarizing using OCR..."):
             st.session_state.result_mode = True
             img = Image.open(uploaded_file)
