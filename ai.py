@@ -8,6 +8,8 @@ load_dotenv('.env')
 # openai.api_key = os.environ['OPENAI_API_KEY']
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
+# openai.error.InvalidRequestError:
+
 #Generate GPT response and return in string format
 def generate_response(prompt):
     response = openai.ChatCompletion.create(
