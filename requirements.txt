@@ -11,3 +11,4 @@ psutil
 PyYAML
 seaborn
 httpx_oauth
+python-dotenv
