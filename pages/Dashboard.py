@@ -4,23 +4,41 @@ from streamlit_echarts import st_echarts
 import db
 import auth
 import webbrowser
+import comms
+from PIL import Image
+import io
 
-if 'user_email' not in st.session_state:
+if "user_email" not in st.session_state:
     st.session_state.user_email = None
 
-if not st.session_state.user_email:
-    if st.button("Login"):
-        webbrowser.open_new_tab(auth.get_login_str())
-elif st.session_state.user_email:
-    # st.balloons()
-    st.markdown(f"`{st.session_state.user_email}`")
-
+# Login
 try:
-    st.session_state.user_email = auth.display_user()
+    st.session_state.user_email = auth.get_user()
+    db.set_user(st.session_state.user_email)
+    st.session_state.user_id = db.get_user_id(st.session_state.user_email)
+    st.session_state.settings = db.get_settings(st.session_state.user_id)
 except Exception as e:
     pass
 
-st.markdown('# :house: Dashboard')
+# https://raw.githubusercontent.com/arjuniyer01/educAItors-madhacks2023/backend-integration/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png
+# https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA
+
+if not st.session_state.user_email:
+    st.markdown(
+        f"""
+    <a href={auth.get_login_str()}>
+    <img src="https://raw.githubusercontent.com/arjuniyer01/educAItors-madhacks2023/backend-integration/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" width="50" height="50">
+    </a>
+    """,
+        unsafe_allow_html=True,
+    )
+    st.write("")
+    st.warning("Please login to access this page")
+    st.stop()
+elif st.session_state.user_email:
+    st.markdown(f"`{st.session_state.user_email}`")
+
+st.markdown("# :house: Dashboard")
 
 # TODO: Get array from DB
 content = db.get_progress(st.session_state.user_id)
@@ -28,57 +46,21 @@ content = db.get_progress(st.session_state.user_id)
 # TODO: Get user's role from DB
 role = db.get_role(st.session_state.user_id)
 
-if role == 'student':
+if role == "student":
     # TODO: Get progress from DB
-    st.markdown('## Progress')
+    st.markdown("## Progress")
+    if len(content.items()) == 0:
+        st.warning("No progress yet")
+        st.stop()
     for key, value in content.items():
-        with st.expander(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(key)))}: {value[0:10]}..."):
+        # {value[0:10]}
+        with st.expander(
+            f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(key)))}: {value[0:10]}..."
+        ):
             st.write(value)
-elif role == 'teacher':
-    # TODO: Get teacher's dashboarding info from DB
-    option1 = {
-        "xAxis": {
-            "type": "category",
-            "data": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-        },
-        "yAxis": {"type": "value"},
-        "series": [{"data": [820, 932, 901, 934, 1290, 1330, 1320], "type": "line"}],
-    }
-    st_echarts(
-        options=option1, height="400px",
-    )
-    option2 = {
-        "legend": {"top": "bottom"},
-        "toolbox": {
-            "show": True,
-            "feature": {
-                "mark": {"show": True},
-                "dataView": {"show": True, "readOnly": False},
-                "restore": {"show": True},
-                "saveAsImage": {"show": True},
-            },
-        },
-        "series": [
-            {
-                "name": "面积模式",
-                "type": "pie",
-                "radius": [50, 250],
-                "center": ["50%", "50%"],
-                "roseType": "area",
-                "itemStyle": {"borderRadius": 8},
-                "data": [
-                    {"value": 40, "name": "rose 1"},
-                    {"value": 38, "name": "rose 2"},
-                    {"value": 32, "name": "rose 3"},
-                    {"value": 30, "name": "rose 4"},
-                    {"value": 28, "name": "rose 5"},
-                    {"value": 26, "name": "rose 6"},
-                    {"value": 22, "name": "rose 7"},
-                    {"value": 18, "name": "rose 8"},
-                ],
-            }
-        ],
-    }
-    st_echarts(
-        options=option2, height="600px",
-    )
+            st.button(
+                "Email to me",
+                on_click=comms.send_email,
+                args=[st.session_state.user_email, value, key],
+                key=key,
+            )

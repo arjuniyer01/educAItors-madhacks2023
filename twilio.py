@@ -12,14 +12,12 @@ client = Client(account_sid, auth_token)
 
 # Send a WhatsApp message
 message = client.messages.create(
-    from_='whatsapp:+14155238886',
-    body="Hello from Twilio!",
-    to=to_whatsapp_number
+    from_="whatsapp:+14155238886", body="Hello from Twilio!", to=to_whatsapp_number
 )
 
 # Send a voice clip as a message
-#message = client.messages.create(
-    #from_='whatsapp:+14155238886',
-    #media_url="https://example.com/voiceclip.mp3",
-    #to=to_whatsapp_number
-#)
+# message = client.messages.create(
+# from_='whatsapp:+14155238886',
+# media_url="https://example.com/voiceclip.mp3",
+# to=to_whatsapp_number
+# )
