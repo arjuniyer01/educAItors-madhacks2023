@@ -1,4 +1,4 @@
-# educAItors-madhacks2023
+# educ-AI-tors-madhacks2023
 
 Deployed at: https://educ-ai-tors.streamlit.app/ (Invite-Only)
 

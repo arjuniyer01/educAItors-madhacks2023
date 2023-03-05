@@ -70,7 +70,7 @@ elif st.session_state.user_email:
 # UI Begins
 col1, col2, col3 = st.columns([1, 1, 1])
 with col2:
-    st.title(":book: educAIte")
+    st.title(":book: educ-AI-te")
 
 user_input = st.text_input(
     "User Input", label_visibility="hidden", placeholder="Paste text here to summarize"

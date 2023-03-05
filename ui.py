@@ -41,7 +41,7 @@ def save_result():
 
 def about(expanded: bool = False):
     with st.expander("About", expanded=expanded):
-        st.markdown("## :wave: Welcome to educAIte!")
+        st.markdown("## :wave: Welcome to educ-AI-te!")
         st.markdown(
             "A powerful language agnostic education tool leveraging AI and computer vision."
         )
