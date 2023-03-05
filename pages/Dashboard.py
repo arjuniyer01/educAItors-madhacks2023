@@ -26,6 +26,7 @@ if not st.session_state.user_email:
     <img src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA" width="50" height="50">
     </a>
     ''', unsafe_allow_html=True)
+    st.write("")
     st.warning("Please login to access this page")
     st.stop()
 elif st.session_state.user_email:
