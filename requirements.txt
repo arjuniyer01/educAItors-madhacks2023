@@ -16,3 +16,4 @@ pymongo
 openai
 opencv-python
 ffmpeg-python
+pydub
