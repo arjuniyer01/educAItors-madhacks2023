@@ -62,11 +62,11 @@ elif uploaded_file:
     elif selected == "OCR":
         with st.spinner("Summarizing using OCR..."):
             st.session_state.result_mode = True
-            # img = Image.open(uploaded_file)
-            # ocr_text = ocr.run_ocr(img.copy())
-            # st.write(ocr_text)
-            # ui.process_result(ocr_text, settings)
-            # ui.display_result()
-            # ui.save_result()
+            img = Image.open(uploaded_file)
+            ocr_text = ocr.run_ocr(img.copy())
+            st.write(ocr_text)
+            ui.process_result(ocr_text, settings)
+            ui.display_result()
+            ui.save_result()
     
 ui.about()
