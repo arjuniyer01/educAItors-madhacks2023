@@ -2,7 +2,7 @@
 
 Deployed at: https://educ-ai-tors.streamlit.app/ (Invite-Only)
 
-## Welcome to educ-AI-te!:
+## Welcome to educ-AI-te !
 
 A powerful language agnostic education tool leveraging AI and computer vision.
 
