@@ -8,7 +8,7 @@ import comms
 from PIL import Image
 import io
 
-if 'user_email' not in st.session_state:
+if "user_email" not in st.session_state:
     st.session_state.user_email = None
 
 # Login
@@ -20,19 +20,25 @@ try:
 except Exception as e:
     pass
 
+# https://raw.githubusercontent.com/arjuniyer01/educAItors-madhacks2023/backend-integration/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png
+# https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA
+
 if not st.session_state.user_email:
-    st.markdown(f'''
+    st.markdown(
+        f"""
     <a href={auth.get_login_str()}>
-    <img src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA" width="50" height="50">
+    <img src="https://raw.githubusercontent.com/arjuniyer01/educAItors-madhacks2023/backend-integration/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" width="50" height="50">
     </a>
-    ''', unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
     st.write("")
     st.warning("Please login to access this page")
     st.stop()
 elif st.session_state.user_email:
     st.markdown(f"`{st.session_state.user_email}`")
 
-st.markdown('# :house: Dashboard')
+st.markdown("# :house: Dashboard")
 
 # TODO: Get array from DB
 content = db.get_progress(st.session_state.user_id)
@@ -40,14 +46,21 @@ content = db.get_progress(st.session_state.user_id)
 # TODO: Get user's role from DB
 role = db.get_role(st.session_state.user_id)
 
-if role == 'student':
+if role == "student":
     # TODO: Get progress from DB
-    st.markdown('## Progress')
+    st.markdown("## Progress")
     if len(content.items()) == 0:
-        st.warning('No progress yet')
+        st.warning("No progress yet")
         st.stop()
     for key, value in content.items():
         # {value[0:10]}
-        with st.expander(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(key)))}: {value[0:10]}..."):
+        with st.expander(
+            f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(key)))}: {value[0:10]}..."
+        ):
             st.write(value)
-            st.button('Email to me', on_click=comms.send_email, args=[st.session_state.user_email, value, key], key=key)
+            st.button(
+                "Email to me",
+                on_click=comms.send_email,
+                args=[st.session_state.user_email, value, key],
+                key=key,
+            )
