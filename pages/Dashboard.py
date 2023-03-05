@@ -41,7 +41,9 @@ if role == 'student':
     for key, value in content.items():
         # {value[0:10]}
         with st.expander(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(key)))}: ##..."):
-            st.write(value)
+            st.image(Image.open(io.BytesIO(value["images"][0])))
+            st.image(Image.open(io.BytesIO(value["images"][1])))
+            st.write(value["summary"])
             # for image in value["images"]:
             #     st.image(Image.open(io.BytesIO(image)))
             # st.write(value["summary"])
