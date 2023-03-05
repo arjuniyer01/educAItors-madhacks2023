@@ -35,7 +35,7 @@ if role == 'student':
     for key, value in content.items():
         with st.expander(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(key)))}: {value[0:10]}..."):
             st.write(value)
-            st.button('Email to me', on_click=comms.send_email, args=[st.session_state.user_email, value], key=key)
+            st.button('Email to me', on_click=comms.send_email, args=[st.session_state.user_email, value, key], key=key)
 elif role == 'teacher':
     # TODO: Get teacher's dashboarding info from DB
     option1 = {
