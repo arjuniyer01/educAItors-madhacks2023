@@ -24,3 +24,4 @@ python-docx
 google-cloud-speech
 google-cloud-texttospeech
 sendgrid
+streamlit-lottie

@@ -8,6 +8,17 @@ import db
 import ui
 import image_processing
 import file_reader
+from streamlit_lottie import st_lottie
+from streamlit_lottie import st_lottie_spinner
+import requests
+
+def load_lottieurl(url: str):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
+
+lottie_object = load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_z0gyv6qn.json")
 
 # # Instantiation
 # settings = None
@@ -31,11 +42,8 @@ except Exception as e:
     pass
 
 if not st.session_state.user_email:
-    # if st.button("Login"):
-    #     webbrowser.open_new_tab(auth.get_login_str())
     st.markdown(f"[Google Login]({auth.get_login_str()})")
 elif st.session_state.user_email:
-    # st.balloons()
     st.markdown(f"`{st.session_state.user_email}`")
 
 
@@ -45,10 +53,13 @@ with col2:
     st.title(":book: educAIte")
 
 user_input = st.text_input("User Input", label_visibility='hidden', placeholder="Paste text here to summarize")
+col1, col2, col3 = st.columns([1,1,1])
+with col2:
+    st.title("OR")
 uploaded_file = st.file_uploader("File Upload", label_visibility='hidden', type=["png", "jpeg", "jpg", "mp3", "pdf", "docx"])
 
 if user_input:
-    with st.spinner("Summarizing input text..."):
+    with st_lottie_spinner(lottie_object, key="download"):
         ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {user_input}")
         ui.display_result()
         ui.save_result()

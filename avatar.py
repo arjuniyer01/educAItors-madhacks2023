@@ -12,7 +12,7 @@ def generate_voice(text: str):
     client = texttospeech.TextToSpeechClient()
     # set up default voice configuration
     voice = texttospeech.VoiceSelectionParams(
-        language_code='en-US', ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
+        language_code='en-GB', ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
     )
     # set up default audio configuration
     audio_config = texttospeech.AudioConfig(
