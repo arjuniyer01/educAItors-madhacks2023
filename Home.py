@@ -18,7 +18,7 @@ def load_lottieurl(url: str):
         return None
     return r.json()
 
-lottie_object = load_lottieurl("https://lottiefiles.com/138450-color-loader")
+lottie_object = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_Q7WY7CfUco.json")
 
 # # Instantiation
 # settings = None
@@ -53,13 +53,10 @@ with col2:
     st.title(":book: educAIte")
 
 user_input = st.text_input("User Input", label_visibility='hidden', placeholder="Paste text here to summarize")
-col1, col2, col3 = st.columns([1,1,1])
-with col1:
-    st.write("OR")
 uploaded_file = st.file_uploader("File Upload", label_visibility='hidden', type=["png", "jpeg", "jpg", "mp3", "pdf", "docx"])
 
 if user_input:
-    with st_lottie_spinner(lottie_object, key="download"):
+    with st_lottie_spinner(lottie_object, key="download", width=100):
         ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {user_input}")
         ui.display_result()
         ui.save_result()
