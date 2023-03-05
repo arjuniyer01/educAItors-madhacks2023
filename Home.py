@@ -44,7 +44,7 @@ except Exception as e:
     pass
 
 if not st.session_state.user_email:
-    st.title(":book: Welcome to educAIte! Please Login with Google")
+    st.title(":book: Welcome to educ-AI-te!")
     st.write("")
     st.markdown(f'''
     <a href={auth.get_login_str()}>
@@ -69,8 +69,10 @@ uploaded_file = st.file_uploader("File Upload", label_visibility='hidden', type=
 
 try:
     if user_input:
+        detail = st.selectbox("Select detail level", ["Skim", "Detailed"])
+        detail_dict = {"Skim": "one paragraph", "Detailed": "detail"}
         with st_lottie_spinner(lottie_object, key="download", width=150):
-            ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in one paragraph. {user_input}")
+            ui.process_result(f"Summarize the below text in {st.session_state.settings['language']}, explain like I am {st.session_state.settings['age']} years old in {detail_dict[detail]}. {user_input}")
             ui.display_result()
             ui.save_result()
     elif uploaded_file:
