@@ -6,7 +6,7 @@ import asyncio
 from httpx_oauth.clients.google import GoogleOAuth2
 from dotenv import load_dotenv
 
-load_dotenv(".env")
+# load_dotenv(".env")
 
 # CLIENT_ID = os.environ['CLIENT_ID']
 # CLIENT_SECRET = os.environ['CLIENT_SECRET']

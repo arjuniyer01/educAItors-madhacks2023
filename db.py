@@ -1,7 +1,15 @@
 from pymongo import MongoClient
+import os
+from dotenv import load_dotenv
+import streamlit as st
+
+# load_dotenv(".env")
+# MONGO_DB_URL = os.environ("MONGO_DB_URL")
+
+MONGO_DB_URL = st.secrets["MONGO_DB_URL"]
 
 cluster = MongoClient(
-    "mongodb+srv://shivam:EDUCATOR1234@cluster0.lglwhpk.mongodb.net/?retryWrites=true&w=majority"
+    MONGO_DB_URL
 )
 
 db = cluster["educators"]

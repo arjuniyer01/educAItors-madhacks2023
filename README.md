@@ -2,6 +2,8 @@
 
 Deployed at: https://educ-ai-tors.streamlit.app/ (Invite-Only)
 
+Madhacks version archived on branch: `madhacks-archived` 
+
 ## Welcome to educ-AI-te !
 
 A powerful language agnostic education tool leveraging AI and computer vision.
