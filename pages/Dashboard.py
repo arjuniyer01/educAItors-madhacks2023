@@ -21,6 +21,7 @@ except Exception as e:
     pass
 
 if not st.session_state.user_email:
+    st.markdown("`Login:`")
     st.markdown(
         f"""
     <a href={auth.get_login_str()}>

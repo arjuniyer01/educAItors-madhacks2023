@@ -50,6 +50,7 @@ except Exception as e:
 
 if not st.session_state.user_email:
     st.title(":book: Welcome to educ-AI-te!")
+    st.markdown("`Login:`")
     st.write("")
     st.markdown(
         f"""
