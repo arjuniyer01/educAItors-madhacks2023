@@ -49,13 +49,14 @@ except Exception as e:
     pass
 
 if not st.session_state.user_email:
+    st.set_page_config(initial_sidebar_state='collapsed')
     st.title(":book: Welcome to educ-AI-te!")
     st.markdown("`Login:`")
     st.write("")
     st.markdown(
         f"""
     <a href={auth.get_login_str()}>
-    <img src="https://raw.githubusercontent.com/arjuniyer01/educAItors-madhacks2023/backend-integration/google.png" width="50" height="50">
+    <img src="https://raw.githubusercontent.com/arjuniyer01/educAItors-madhacks2023/development/google.png" width="50" height="50">
     </a>
     <br>
     """,

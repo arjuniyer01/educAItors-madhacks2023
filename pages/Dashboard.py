@@ -25,7 +25,7 @@ if not st.session_state.user_email:
     st.markdown(
         f"""
     <a href={auth.get_login_str()}>
-    <img src="https://raw.githubusercontent.com/arjuniyer01/educAItors-madhacks2023/backend-integration/google.png" width="50" height="50">
+    <img src="https://raw.githubusercontent.com/arjuniyer01/educAItors-madhacks2023/development/google.png" width="50" height="50">
     </a>
     """,
         unsafe_allow_html=True,
