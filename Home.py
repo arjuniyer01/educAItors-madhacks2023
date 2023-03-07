@@ -3,12 +3,10 @@ import pydub
 import ai
 from PIL import Image
 import auth
-import webbrowser
 import db
 import ui
 import image_processing
 import file_reader
-from streamlit_lottie import st_lottie
 from streamlit_lottie import st_lottie_spinner
 import requests
 
@@ -49,7 +47,6 @@ except Exception as e:
     pass
 
 if not st.session_state.user_email:
-    st.set_page_config(initial_sidebar_state='collapsed')
     st.title(":book: Welcome to educ-AI-te!")
     st.markdown("`Login:`")
     st.write("")
